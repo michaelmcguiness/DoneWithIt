@@ -1,20 +1,12 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-// type glyphmap = typeof import('react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json')
-import glyphmap from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json'
 
 import colors from '../config/colors'
-
-type MyMap<T> = {
-  [P in keyof T]: number
-}
-
-// spread keys after converting glyphmap into MyMap
-type MapKeys = keyof MyMap<typeof glyphmap>
+import { IconName } from '../types'
 
 export interface Props {
-  name: MapKeys
+  name: IconName
   size?: number
   backgroundColor?: string
   iconColor?: string

@@ -4,7 +4,7 @@ import Constants from 'expo-constants'
 
 interface Props {
   children: React.ReactNode
-  style: Object
+  style?: Object
 }
 
 const Screen: React.FC<Props> = ({ children, style }) => {
