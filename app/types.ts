@@ -14,6 +14,11 @@ export interface MenuItem {
   icon: IconProps
 }
 
+export interface Category {
+  label: string
+  value: number
+}
+
 type MyMap<T> = {
   [P in keyof T]: number
 }

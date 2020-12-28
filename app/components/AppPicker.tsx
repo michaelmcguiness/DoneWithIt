@@ -1,19 +1,36 @@
 import React, { useState } from 'react'
-import { Button, Modal, StyleSheet, View } from 'react-native'
+import {
+  Button,
+  Modal,
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Screen from './Screen'
 import AppText, { Props as AppTextProps } from './AppText'
 import defaultStyles from '../config/styles'
 import { IconName } from '../types'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import PickerItem from './PickerItem'
+import { Category } from '../types'
 
 interface Props extends AppTextProps {
   placeholder: string
+  items: Category[]
   iconName?: IconName
+  onSelectItem: (item: Category) => void
+  selectedItem: Category
 }
 
-const AppPicker: React.FC<Props> = ({ iconName, placeholder, ...rest }) => {
+const AppPicker: React.FC<Props> = ({
+  iconName,
+  items,
+  placeholder,
+  onSelectItem,
+  selectedItem,
+}) => {
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   return (
     <>
@@ -27,8 +44,8 @@ const AppPicker: React.FC<Props> = ({ iconName, placeholder, ...rest }) => {
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text} {...rest}>
-            {placeholder}
+          <AppText style={styles.text}>
+            {selectedItem ? selectedItem.label : placeholder}
           </AppText>
           <MaterialCommunityIcons
             name="chevron-down"
@@ -40,6 +57,19 @@ const AppPicker: React.FC<Props> = ({ iconName, placeholder, ...rest }) => {
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
           <Button title="Close" onPress={() => setModalVisible(false)} />
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item.value.toString()}
+            renderItem={({ item }) => (
+              <PickerItem
+                label={item.label}
+                onPress={() => {
+                  setModalVisible(false)
+                  onSelectItem(item)
+                }}
+              />
+            )}
+          />
         </Screen>
       </Modal>
     </>
