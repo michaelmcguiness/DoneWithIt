@@ -20,7 +20,11 @@ const AppTextInput: React.FC<Props> = ({ iconName, ...rest }) => {
           style={styles.icon}
         />
       )}
-      <TextInput style={defaultStyles.text} {...rest} />
+      <TextInput
+        placeholderTextColor={defaultStyles.colors.medium}
+        style={defaultStyles.text}
+        {...rest}
+      />
     </View>
   )
 }

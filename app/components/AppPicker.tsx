@@ -16,12 +16,12 @@ import { IconName } from '../types'
 import PickerItem from './PickerItem'
 import { Category } from '../types'
 
-interface Props extends AppTextProps {
+export interface Props extends AppTextProps {
   placeholder: string
   items: Category[]
   iconName?: IconName
   onSelectItem: (item: Category) => void
-  selectedItem: Category
+  selectedItem?: Category
 }
 
 const AppPicker: React.FC<Props> = ({
@@ -44,9 +44,11 @@ const AppPicker: React.FC<Props> = ({
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -87,6 +89,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    color: defaultStyles.colors.medium,
+    flex: 1,
   },
   text: {
     flex: 1,
