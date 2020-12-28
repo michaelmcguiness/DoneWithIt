@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import defaultStyles from '../config/styles'
 import { IconName } from '../types'
 
-interface Props extends TextInputProps {
+export interface Props extends TextInputProps {
   iconName?: IconName
 }
 
