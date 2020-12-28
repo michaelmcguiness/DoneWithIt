@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   GestureResponderEvent,
 } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 // @ts-ignore
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 
@@ -19,10 +20,10 @@ interface Props {
   image?: ImageSourcePropType
   IconComponent?: any
   onPress?: (event: GestureResponderEvent) => void
-  renderRightActions?: any
+  renderRightActions?: (props: any) => React.ReactNode
 }
 
-const Card: React.FC<Props> = ({
+const ListItem: React.FC<Props> = ({
   title,
   subtitle,
   image,
@@ -40,6 +41,11 @@ const Card: React.FC<Props> = ({
             <AppText style={styles.title}>{title}</AppText>
             {subtitle && <AppText style={styles.subtitle}>{subtitle}</AppText>}
           </View>
+          <MaterialCommunityIcons
+            color={colors.medium}
+            name="chevron-right"
+            size={25}
+          />
         </View>
       </TouchableHighlight>
     </Swipeable>
@@ -48,11 +54,13 @@ const Card: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     flexDirection: 'row',
     padding: 15,
     backgroundColor: colors.white,
   },
   detailsContainer: {
+    flex: 1,
     marginLeft: 10,
     justifyContent: 'center',
   },
@@ -69,4 +77,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Card
+export default ListItem

@@ -1,9 +1,13 @@
 import React from 'react'
-import { View, StyleSheet, GestureResponderEvent } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import colors from '../config/colors'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 interface Props {
   onPress: (event: GestureResponderEvent) => void

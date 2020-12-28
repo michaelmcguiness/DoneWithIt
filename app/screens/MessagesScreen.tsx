@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { FlatList, Image, StyleSheet, View } from 'react-native'
+import { FlatList } from 'react-native'
 
 import Screen from '../components/Screen'
 import ListItem from '../components/ListItem'
 import ListItemSeparator from '../components/ListItemSeparator'
 import ListItemDeleteAction from '../components/ListItemDeleteAction'
 
-import colors from '../config/colors'
 import { Message } from '../types'
 
 const initialMessages: Message[] = [
@@ -64,7 +63,5 @@ function MessagesScreen() {
     </Screen>
   )
 }
-
-const styles = StyleSheet.create({})
 
 export default MessagesScreen
