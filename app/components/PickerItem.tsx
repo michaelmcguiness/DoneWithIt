@@ -6,16 +6,17 @@ import {
 } from 'react-native'
 
 import AppText from './AppText'
+import { Category } from '../types'
 
 export interface Props {
-  label: string
+  item: Category
   onPress?: (event: GestureResponderEvent) => void
 }
 
-const PickerItem: React.FC<Props> = ({ label, onPress }) => {
+const PickerItem: React.FC<Props> = ({ item, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <AppText style={styles.text}>{label}</AppText>
+      <AppText style={styles.text}>{item.label}</AppText>
     </TouchableOpacity>
   )
 }

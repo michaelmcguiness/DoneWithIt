@@ -7,11 +7,16 @@ import { IconName } from '../types'
 
 export interface Props extends TextInputProps {
   iconName?: IconName
+  width?: number
 }
 
-const AppTextInput: React.FC<Props> = ({ iconName, ...rest }) => {
+const AppTextInput: React.FC<Props> = ({
+  iconName,
+  width = '100%',
+  ...rest
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width }]}>
       {iconName && (
         <MaterialCommunityIcons
           name={iconName}
@@ -34,7 +39,6 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: 'row',
-    width: '100%',
     padding: 15,
     marginVertical: 10,
   },

@@ -17,6 +17,8 @@ export interface MenuItem {
 export interface Category {
   label: string
   value: number
+  backgroundColor: string
+  iconName: IconName
 }
 
 type MyMap<T> = {

@@ -38,8 +38,14 @@ const ListItem: React.FC<Props> = ({
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
           <View style={styles.detailsContainer}>
-            <AppText style={styles.title}>{title}</AppText>
-            {subtitle && <AppText style={styles.subtitle}>{subtitle}</AppText>}
+            <AppText style={styles.title} numberOfLines={1}>
+              {title}
+            </AppText>
+            {subtitle && (
+              <AppText style={styles.subtitle} numberOfLines={2}>
+                {subtitle}
+              </AppText>
+            )}
           </View>
           <MaterialCommunityIcons
             color={colors.medium}

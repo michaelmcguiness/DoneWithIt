@@ -7,6 +7,7 @@ import ErrorMessage from './ErrorMessage'
 
 export interface Props extends AppTextInputProps {
   name: string
+  width?: number
 }
 
 const AppFormField: React.FC<Props> = ({ name, ...rest }) => {

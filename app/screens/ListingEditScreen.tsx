@@ -3,11 +3,12 @@ import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
 
 import {
-  AppForm,
-  AppFormField,
+  AppForm as Form,
+  AppFormField as FormField,
+  AppFormPicker as Picker,
   SubmitButton,
-  AppFormPicker,
 } from '../components/forms'
+import CategoryPickerItem from '../components/CategoryPickerItem'
 import Screen from '../components/Screen'
 import { Category } from '../types'
 
@@ -19,15 +20,15 @@ const validationSchema = Yup.object().shape({
 })
 
 const categories: Category[] = [
-  { label: 'Furniture', value: 1 },
-  { label: 'Clothing', value: 2 },
-  { label: 'Camera', value: 3 },
+  { label: 'Furniture', value: 1, backgroundColor: 'red', iconName: 'apps' },
+  { label: 'Clothing', value: 2, backgroundColor: 'green', iconName: 'email' },
+  { label: 'Camera', value: 3, backgroundColor: 'blue', iconName: 'lock' },
 ]
 
 function LoginScreen() {
   return (
     <Screen style={styles.container}>
-      <AppForm
+      <Form
         initialValues={{
           title: '',
           price: '',
@@ -37,20 +38,25 @@ function LoginScreen() {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        <AppFormField maxLength={255} name="title" placeholder="Title" />
-        <AppFormField
+        <FormField maxLength={255} name="title" placeholder="Title" />
+        <FormField
           keyboardType="numeric"
           maxLength={8}
           name="price"
           placeholder="Price"
+          width={120}
         />
-        <AppFormPicker
+        <Picker
           items={categories}
           name="category"
+          numberOfColumns={3}
+          // @ts-ignore
+          PickerItemComponent={CategoryPickerItem}
           placeholder="Category"
           onSelectItem={() => console.log('selected')}
+          width="50%"
         />
-        <AppFormField
+        <FormField
           maxLength={255}
           multiline
           name="description"
@@ -58,7 +64,7 @@ function LoginScreen() {
           placeholder="Description"
         />
         <SubmitButton title="Post" />
-      </AppForm>
+      </Form>
     </Screen>
   )
 }
