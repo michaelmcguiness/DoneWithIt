@@ -11,12 +11,15 @@ import {
 import CategoryPickerItem from '../components/CategoryPickerItem'
 import Screen from '../components/Screen'
 import { Category } from '../types'
+import FormImagePicker from '../components/forms/FormImagePicker'
+import useLocation from '../hooks/useLocation'
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label('Title'),
   price: Yup.number().required().min(1).max(10000).label('Price'),
   description: Yup.string().label('Description'),
   category: Yup.object().required().nullable().label('Category'),
+  images: Yup.array().min(1, 'Please select at least one image'),
 })
 
 const categories: Category[] = [
@@ -25,7 +28,8 @@ const categories: Category[] = [
   { label: 'Camera', value: 3, backgroundColor: 'blue', iconName: 'lock' },
 ]
 
-function LoginScreen() {
+function ListingEditScreen() {
+  const location = useLocation()
   return (
     <Screen style={styles.container}>
       <Form
@@ -34,10 +38,12 @@ function LoginScreen() {
           price: '',
           description: '',
           category: null,
+          images: [],
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={() => console.log(location)}
         validationSchema={validationSchema}
       >
+        <FormImagePicker name="images" />
         <FormField maxLength={255} name="title" placeholder="Title" />
         <FormField
           keyboardType="numeric"
@@ -53,7 +59,6 @@ function LoginScreen() {
           // @ts-ignore
           PickerItemComponent={CategoryPickerItem}
           placeholder="Category"
-          onSelectItem={() => console.log('selected')}
           width="50%"
         />
         <FormField
@@ -75,4 +80,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default LoginScreen
+export default ListingEditScreen

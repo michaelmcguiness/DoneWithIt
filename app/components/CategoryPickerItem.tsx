@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 
 import AppText from './AppText'
 import Icon from './Icon'
@@ -9,14 +9,14 @@ export interface Props extends PickerItemProps {}
 
 const CategoryPickerItem: React.FC<Props> = ({ item, onPress }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Icon
         backgroundColor={item.backgroundColor}
         name={item.iconName}
         size={80}
       />
       <AppText style={styles.label}>{item.label}</AppText>
-    </View>
+    </TouchableOpacity>
   )
 }
 
