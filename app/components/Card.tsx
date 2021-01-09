@@ -1,5 +1,11 @@
 import React from 'react'
-import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Image,
+  ImageSourcePropType,
+  TouchableWithoutFeedback,
+} from 'react-native'
 
 import AppText from './AppText'
 import colors from '../config/colors'
@@ -8,21 +14,24 @@ interface Props {
   title: string
   subtitle: string
   image: ImageSourcePropType
+  onPress?: () => void
 }
 
-const Card: React.FC<Props> = ({ title, subtitle, image }) => {
+const Card: React.FC<Props> = ({ title, subtitle, image, onPress }) => {
   return (
-    <View style={styles.card}>
-      <Image style={styles.image} source={image} />
-      <View style={styles.detailsContainer}>
-        <AppText style={styles.title} numberOfLines={1}>
-          {title}
-        </AppText>
-        <AppText style={styles.subtitle} numberOfLines={2}>
-          {subtitle}
-        </AppText>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.card}>
+        <Image style={styles.image} source={image} />
+        <View style={styles.detailsContainer}>
+          <AppText style={styles.title} numberOfLines={1}>
+            {title}
+          </AppText>
+          <AppText style={styles.subtitle} numberOfLines={2}>
+            {subtitle}
+          </AppText>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 

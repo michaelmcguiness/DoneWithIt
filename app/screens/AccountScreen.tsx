@@ -1,5 +1,6 @@
 import React from 'react'
-import { Image, StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import Screen from '../components/Screen'
 import Icon from '../components/Icon'
@@ -7,6 +8,7 @@ import ListItem from '../components/ListItem'
 import ListItemSeparator from '../components/ListItemSeparator'
 import colors from '../config/colors'
 import { MenuItem } from '../types'
+import { AccountStackParamList } from '../navigation/AccountNavigator'
 
 const menuItems: MenuItem[] = [
   {
@@ -15,6 +17,7 @@ const menuItems: MenuItem[] = [
       name: 'format-list-bulleted',
       backgroundColor: colors.primary,
     },
+    targetScreen: 'Account',
   },
   {
     title: 'My Messages',
@@ -22,10 +25,20 @@ const menuItems: MenuItem[] = [
       name: 'email',
       backgroundColor: colors.secondary,
     },
+    targetScreen: 'Messages',
   },
 ]
 
-function AccountScreen() {
+type ListingsScreenNavigationProp = StackNavigationProp<
+  AccountStackParamList,
+  'Messages'
+>
+
+interface props {
+  navigation: ListingsScreenNavigationProp
+}
+
+const AccountScreen: React.FC<props> = ({ navigation }) => {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -49,6 +62,7 @@ function AccountScreen() {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
+              onPress={() => navigation.navigate(item.targetScreen)}
             />
           )}
         />

@@ -1,15 +1,14 @@
 import React from 'react'
-import { Image, StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 
 import Screen from '../components/Screen'
-import Icon from '../components/Icon'
-import ListItem from '../components/ListItem'
-import ListItemSeparator from '../components/ListItemSeparator'
 import colors from '../config/colors'
-import { MenuItem } from '../types'
+import { Listing } from '../types'
 import Card from '../components/Card'
+import { FeedStackParamList } from '../navigation/FeedNavigator'
+import { StackNavigationProp } from '@react-navigation/stack'
 
-const listings = [
+const listings: Listing[] = [
   {
     id: 1,
     title: 'Red jacket for sale',
@@ -24,7 +23,16 @@ const listings = [
   },
 ]
 
-function ListingsScreen() {
+type ListingsScreenNavigationProp = StackNavigationProp<
+  FeedStackParamList,
+  'ListingDetails'
+>
+
+interface props {
+  navigation: ListingsScreenNavigationProp
+}
+
+const ListingsScreen: React.FC<props> = ({ navigation }) => {
   return (
     <Screen style={styles.screen}>
       <FlatList
@@ -35,6 +43,7 @@ function ListingsScreen() {
             title={item.title}
             subtitle={'$' + item.price}
             image={item.image}
+            onPress={() => navigation.navigate('ListingDetails', item)}
           />
         )}
       />

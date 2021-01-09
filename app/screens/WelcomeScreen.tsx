@@ -1,9 +1,20 @@
 import React from 'react'
 import { Image, ImageBackground, StyleSheet, View, Text } from 'react-native'
+import { StackNavigationProp } from '@react-navigation/stack'
+
+import { AuthStackParamList } from '../navigation/AuthNavigator'
 import AppButton from '../components/AppButton'
 import colors from '../config/colors'
 
-function WelcomeScreen() {
+type WelcomeScreenNavigationProp = StackNavigationProp<
+  AuthStackParamList,
+  'Welcome'
+>
+interface props {
+  navigation: WelcomeScreenNavigationProp
+}
+
+const WelcomeScreen: React.FC<props> = ({ navigation }) => {
   return (
     <ImageBackground
       blurRadius={5}
@@ -15,10 +26,10 @@ function WelcomeScreen() {
         <Text style={styles.tagline}>Sell What You Don't Need</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <AppButton title="Login" onPress={() => console.log('logged in')} />
+        <AppButton title="Login" onPress={() => navigation.navigate('Login')} />
         <AppButton
           title="Register"
-          onPress={() => console.log('registered')}
+          onPress={() => navigation.navigate('Register')}
           color={colors.secondary}
         />
       </View>

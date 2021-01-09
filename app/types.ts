@@ -12,6 +12,7 @@ export interface Message {
 export interface MenuItem {
   title: string
   icon: IconProps
+  targetScreen: 'Messages' | 'Account'
 }
 
 export interface Category {
@@ -27,3 +28,10 @@ type MyMap<T> = {
 
 // spread keys after converting glyphmap into MyMap
 export type IconName = keyof MyMap<typeof glyphmap>
+
+export interface Listing {
+  id: number
+  title: string
+  price: number
+  image: ImageSourcePropType
+}
