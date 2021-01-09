@@ -33,5 +33,10 @@ export interface Listing {
   id: number
   title: string
   price: number
-  image: ImageSourcePropType
+  images: ListingImage[]
+}
+
+export interface ListingImage {
+  url: string
+  thumbnailUrl: string
 }
